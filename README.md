@@ -1,10 +1,9 @@
-# book-finder
+# Book Finder
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
+## Prerequisite
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[Nodenv](https://github.com/nodenv/nodenv)
 
 ## Customize configuration
 
@@ -14,6 +13,12 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ```sh
 npm install
+```
+
+### Set up Pre-commit hook
+
+```sh
+npm run prepare
 ```
 
 ### Compile and Hot-Reload for Development

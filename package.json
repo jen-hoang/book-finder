@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "v20.12.2",
+    "npm": "10.5.0"
+  },
   "scripts": {
+    "prepare": "husky install",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -26,10 +31,20 @@
     "eslint": "^8.57.0",
     "eslint-plugin-playwright": "^1.5.4",
     "eslint-plugin-vue": "^9.23.0",
+    "husky": "^9.0.11",
     "jsdom": "^24.0.0",
+    "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "vite": "^5.2.8",
     "vite-plugin-vue-devtools": "^7.0.25",
     "vitest": "^1.4.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
+    "*.vue": [
+      "eslint --fix"
+    ]
   }
 }
