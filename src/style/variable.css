@@ -1,0 +1,38 @@
+/** 
+* This file stores all global variables for the project
+*/
+
+/* Semantic color variables */
+:root {
+  /* Primary color */
+  --color-primary: #f1bb55;
+  --color-primary-100: #fdfdfc;
+  --color-primary-200: #faf8f5;
+  --color-primary-300: #faf6ee;
+  /* Secondary color */
+  --color-secondary: #90d2c8;
+  --color-secondary-100: #d1d4d3;
+  --color-secondary-200: #b6c0bf;
+  --color-secondary-300: #57605f;
+  --color-secondary-400: #495049;
+  --color-secondary-500: #193732;
+  --color-secondary-600: #11221f;
+}
+/* Functional color variables */
+:root {
+  --color-background: var(--color-primary-300);
+  --color-heading-1: var(--color-secondary-600);
+  --color-heading-2: var(--color-secondary-500);
+  --color-text-body: var(--color-secondary-400);
+  --color-active-border: var(--color-secondary-600);
+}
+/* Typography */
+:root {
+  --font-family-main: 'Red Hat Display', sans-serif;
+  --font-family-heading: 'DM Serif Display', serif;
+}
+/* Other */
+:root {
+  --base-spacing: 0.8rem;
+  --max-width: 1400px;
+}
