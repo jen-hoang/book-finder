@@ -25,6 +25,7 @@
   --color-heading-2: var(--color-secondary-500);
   --color-text-body: var(--color-secondary-400);
   --color-active-border: var(--color-secondary-600);
+  --color-active: var(--color-secondary);
 }
 /* Typography */
 :root {
@@ -35,4 +36,5 @@
 :root {
   --base-spacing: 0.8rem;
   --max-width: 1400px;
+  --border-radius-base: 0.4rem;
 }

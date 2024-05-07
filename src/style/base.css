@@ -1,0 +1,112 @@
+/* Typography */
+:root {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+  font-family: var(--font-family-main);
+  color: var(--color-text-body);
+  background-color: var(--color-background);
+}
+a {
+  color: var(--color-active);
+}
+a:hover {
+  filter: brightness(120%);
+}
+a:focus {
+  outline-color: var(--color-active-border);
+}
+p {
+  word-break: break-word;
+}
+/* Typography classes */
+.heading-1 {
+  color: var(--color-heading-1);
+  font-family: var(--font-family-heading);
+  font-size: 3.2rem;
+}
+.heading-2 {
+  color: var(--color-heading-2);
+  font-family: var(--font-family-heading);
+  font-size: 2.4rem;
+}
+.sub-heading {
+  font-size: 2.4rem;
+}
+.body-large {
+  font-size: 1.8rem;
+}
+.body-medium {
+  font-size: 1.6rem;
+}
+.body-small {
+  font-size: 1.2rem;
+}
+.label {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.text-weight-bold {
+  font-weight: 500;
+}
+/* Border radius */
+.rounded {
+  border-radius: var(--border-radius-base);
+}
+/* Flex 12-col grid system */
+.f-w-container {
+  width: 100%;
+  margin: auto;
+  max-width: var(--max-width);
+}
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  --columns: 12;
+  --base-gap: var(--base-spacing);
+  --base-basis: calc((100% - (var(--base-gap) * (var(--columns) - 1))) / var(--columns));
+}
+[class*='col-'] {
+  --width: 1;
+  --col-basis: calc((var(--width) * var(--base-basis)) + ((var(--width) - 1) * var(--base-gap)));
+  flex-basis: var(--col-basis);
+  position: relative;
+}
+.col-1 {
+  --width: 1;
+}
+.col-2 {
+  --width: 2;
+}
+.col-3 {
+  --width: 3;
+}
+.col-4 {
+  --width: 4;
+}
+.col-5 {
+  --width: 5;
+}
+.col-6 {
+  --width: 6;
+}
+.col-7 {
+  --width: 7;
+}
+.col-8 {
+  --width: 8;
+}
+.col-9 {
+  --width: 9;
+}
+.col-10 {
+  --width: 10;
+}
+.col-11 {
+  --width: 11;
+}
+.col-12 {
+  --width: 12;
+}
