@@ -43,7 +43,7 @@ p {
 .body-small {
   font-size: 1.2rem;
 }
-.label {
+.text-label {
   font-size: 1.4rem;
   font-weight: 600;
 }
@@ -58,6 +58,7 @@ p {
 .f-w-container {
   width: 100%;
   margin: auto;
+  padding-inline: 6.4rem;
   max-width: var(--max-width);
 }
 .row {
