@@ -1,17 +1,31 @@
 <script setup>
 import BaseIcon from '@/component/BaseIcon.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 const searchInput = ref('');
-const testEvent = () => {
-  console.log('test event');
+const isInputClearable = computed(() => searchInput.value.length > 0);
+const clearInput = () => {
+  searchInput.value = '';
+};
+const router = useRouter();
+const submitSearch = () => {
+  const value = searchInput.value.trim();
+  if (value.length > 0) {
+    router.push({ name: 'search', query: { q: value } });
+  }
 };
 </script>
 <template>
-  <form>
+  <form @submit.prevent="submitSearch">
     <div :class="[$style['input-container'], 'rounded']">
       <BaseIcon name="search" :class="$style['main-icon']" />
       <input v-model="searchInput" placeholder="Enter book title, author, etc. " />
-      <BaseIcon name="cancel" :class="$style['clear-icon']" @click="testEvent" />
+      <BaseIcon
+        name="cancel"
+        :class="$style['clear-icon']"
+        v-if="isInputClearable"
+        @click="clearInput"
+      />
     </div>
   </form>
 </template>
