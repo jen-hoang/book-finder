@@ -1,5 +1,6 @@
 <script setup>
 import AuthorList from '@/component/AuthorList.vue';
+import TagList from '@/component/TagList.vue';
 const value = {
   title: 'Design Patterns',
   subtitle: 'Elements of Reusable Object-Oriented Software',
@@ -21,12 +22,8 @@ const value = {
       <p class="text-body-large">{{ value.subtitle }}</p>
       <!-- Author -->
       <AuthorList :list="value.author" />
-      <ul>
-        <li v-for="category in value.categories" :key="category">
-          {{ category }}
-        </li>
-      </ul>
       <p class="text-body-medium">{{ value.description }}</p>
+      <TagList :list="value.categories" />
     </section>
   </article>
 </template>
