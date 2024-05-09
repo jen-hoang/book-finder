@@ -115,3 +115,7 @@ p {
 .m-auto {
   margin: auto;
 }
+/* Re-active classes */
+.clickable {
+  cursor: pointer;
+}

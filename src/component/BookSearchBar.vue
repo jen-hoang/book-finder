@@ -2,13 +2,16 @@
 import BaseIcon from '@/component/BaseIcon.vue';
 import { ref } from 'vue';
 const searchInput = ref('');
+const testEvent = () => {
+  console.log('test event');
+};
 </script>
 <template>
   <form>
     <div :class="[$style['input-container'], 'rounded']">
       <BaseIcon name="search" :class="$style['main-icon']" />
       <input v-model="searchInput" placeholder="Enter book title, author, etc. " />
-      <BaseIcon name="cancel" :class="$style['clear-icon']" />
+      <BaseIcon name="cancel" :class="$style['clear-icon']" @click="testEvent" />
     </div>
   </form>
 </template>
@@ -20,7 +23,7 @@ const searchInput = ref('');
   justify-content: space-between;
   gap: 1.6rem;
   padding: 1.6rem;
-  border: 1px solid var(--color-secondary-200);
+  border: 0.1rem solid var(--color-secondary-200);
 }
 .input-container input {
   flex-grow: 1;

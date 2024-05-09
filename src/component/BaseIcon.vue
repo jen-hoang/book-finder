@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, useAttrs } from 'vue';
 const props = defineProps({
   name: String,
   size: {
@@ -26,9 +26,23 @@ const iconName = computed(() => {
   };
   return nameList[props.name];
 });
+const attrs = useAttrs();
+const hasClick = computed(() => {
+  return !!attrs.onClick;
+});
 </script>
 <template>
-  <i :class="['iconsax', $style['base-icon']]" :icon-name="iconName"></i>
+  <i
+    :class="[
+      'iconsax',
+      $style['base-icon'],
+      {
+        clickable: hasClick,
+      },
+    ]"
+    :icon-name="iconName"
+    v-bind="$attrs"
+  ></i>
 </template>
 <style module>
 .base-icon {
