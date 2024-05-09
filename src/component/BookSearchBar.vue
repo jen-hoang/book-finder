@@ -1,7 +1,14 @@
 <script setup>
 import BaseIcon from '@/component/BaseIcon.vue';
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+const route = useRoute();
+onMounted(() => {
+  // if current route is search page, set the search input value
+  if (route.name === 'search') {
+    searchInput.value = route.query.q;
+  }
+});
 const searchInput = ref('');
 const isInputClearable = computed(() => searchInput.value.length > 0);
 const clearInput = () => {

@@ -17,6 +17,9 @@ a:hover {
 a:focus {
   outline-color: var(--color-active-border);
 }
+nav a {
+  color: var(--color-secondary-300);
+}
 p {
   word-break: break-word;
 }
@@ -62,6 +65,7 @@ p {
   max-width: var(--max-width);
 }
 .row {
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -110,6 +114,16 @@ p {
 }
 .col-12 {
   --width: 12;
+}
+/* Flexbox utilities */
+.d-flex {
+  display: flex;
+}
+.align-center {
+  align-items: center;
+}
+.flex-end {
+  justify-content: flex-end;
 }
 /* Spacing */
 .m-auto {

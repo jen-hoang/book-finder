@@ -14,7 +14,4 @@
   height: 9.8rem;
   margin: auto;
 }
-.nav-bar a {
-  color: var(--color-secondary-300);
-}
 </style>
