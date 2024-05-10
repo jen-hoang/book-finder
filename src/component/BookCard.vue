@@ -12,18 +12,71 @@ const value = {
 };
 </script>
 <template>
-  <article :class="['d-flex']">
+  <article :class="[$style['book-card'], 'd-flex']" aria-pressed="true">
     <figure>
-      <img :src="value.img" alt="book cover" />
+      <img :src="value.img" alt="book cover" class="rounded" />
     </figure>
 
-    <section>
-      <h2 class="heading-2">{{ value.title }}</h2>
-      <p class="text-body-large">{{ value.subtitle }}</p>
-      <!-- Author -->
-      <AuthorList :list="value.author" />
-      <p class="text-body-medium">{{ value.description }}</p>
-      <TagList :list="value.categories" />
-    </section>
+    <div :class="[$style['content'], 'd-flex']">
+      <header class="d-flex">
+        <h2 class="heading-2">
+          {{ value.title }}
+        </h2>
+        <p :class="['text-body-large', $style['sub-title']]">
+          {{ value.subtitle }}
+        </p>
+        <AuthorList :list="value.author" />
+      </header>
+
+      <section>
+        <p class="text-body-medium">{{ value.description }}</p>
+      </section>
+      <section>
+        <TagList :list="value.categories" />
+      </section>
+    </div>
   </article>
 </template>
+<style module>
+.book-card {
+  gap: 1.6rem;
+  padding-block: 1.6rem;
+  cursor: pointer;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    background-color 0.1s;
+}
+.book-card:hover {
+  padding: 1.6rem;
+  border: 0.1rem solid var(--color-secondary-600);
+  background-color: var(--color-primary-200);
+  border-radius: 0.4rem;
+  transform: translate(-0.8rem, -0.8rem);
+  box-shadow: 0.8rem 0.8rem 0rem var(--color-secondary-600);
+}
+.book-card:pressed {
+  background-color: yellow;
+}
+.book-card figure img {
+  border: 0.1rem solid var(--color-secondary-100);
+}
+.sub-title {
+  color: var(--color-secondary-500);
+}
+.content {
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.content > header {
+  flex-direction: column;
+  gap: 0.4rem;
+}
+/* paragraph only limit to 3 lines */
+.content p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</style>

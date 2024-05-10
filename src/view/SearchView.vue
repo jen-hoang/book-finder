@@ -7,7 +7,14 @@ const { q: searchQuery } = route.query;
 </script>
 <template>
   <MainHeader />
-  <main>
-    <BookCardList :searchQuery="searchQuery" />
+  <main :class="[$style['search-main'], 'f-w-container row']">
+    <section class="col-6 m-auto">
+      <BookCardList :searchQuery="searchQuery" />
+    </section>
   </main>
 </template>
+<style module>
+.search-main > section:first-child {
+  margin-top: 0.8rem;
+}
+</style>

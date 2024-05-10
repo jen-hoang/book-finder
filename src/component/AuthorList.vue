@@ -18,6 +18,7 @@ const props = defineProps({
   gap: 0.2rem;
   padding: 0;
   color: var(--color-secondary-300);
+  flex-wrap: wrap;
 }
 .author-list > li:not(:last-child)::after {
   content: ',';
