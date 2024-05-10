@@ -12,7 +12,7 @@ const value = {
 };
 </script>
 <template>
-  <article :class="[$style['book-card'], 'd-flex']" aria-pressed="true">
+  <article :class="[$style['book-card'], 'd-flex']">
     <figure>
       <img :src="value.img" alt="book cover" class="rounded" />
     </figure>
@@ -22,7 +22,7 @@ const value = {
         <h2 class="heading-2">
           {{ value.title }}
         </h2>
-        <p :class="['text-body-large', $style['sub-title']]">
+        <p class="text-body-large">
           {{ value.subtitle }}
         </p>
         <AuthorList :list="value.author" />
@@ -50,19 +50,13 @@ const value = {
 .book-card:hover {
   padding: 1.6rem;
   border: 0.1rem solid var(--color-secondary-600);
-  background-color: var(--color-primary-200);
+  background-color: var(--color-primary-100);
   border-radius: 0.4rem;
   transform: translate(-0.8rem, -0.8rem);
   box-shadow: 0.8rem 0.8rem 0rem var(--color-secondary-600);
 }
-.book-card:pressed {
-  background-color: yellow;
-}
 .book-card figure img {
   border: 0.1rem solid var(--color-secondary-100);
-}
-.sub-title {
-  color: var(--color-secondary-500);
 }
 .content {
   flex-direction: column;
@@ -71,6 +65,9 @@ const value = {
 .content > header {
   flex-direction: column;
   gap: 0.4rem;
+}
+.content > header p {
+  color: var(--color-secondary-500);
 }
 /* paragraph only limit to 3 lines */
 .content p {

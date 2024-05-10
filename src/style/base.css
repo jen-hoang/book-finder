@@ -36,8 +36,12 @@ p {
   font-size: 2.4rem;
   line-height: 1.25;
 }
-.sub-heading {
+.sub-heading-1 {
   font-size: 2.4rem;
+}
+.sub-heading-2 {
+  font-size: 2rem;
+  line-height: 1.25;
 }
 .text-body-large {
   font-size: 1.8rem;
