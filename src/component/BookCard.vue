@@ -40,7 +40,7 @@ const value = {
 <style module>
 .book-card {
   gap: 1.6rem;
-  padding-block: 1.6rem;
+  padding: 1.6rem;
   cursor: pointer;
   transition:
     transform 0.3s,
@@ -48,7 +48,7 @@ const value = {
     background-color 0.1s;
 }
 .book-card:hover {
-  padding: 1.6rem;
+  padding-block: 1.5rem;
   border: 0.1rem solid var(--color-secondary-600);
   background-color: var(--color-primary-100);
   border-radius: 0.4rem;

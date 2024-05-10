@@ -31,6 +31,7 @@ import BookCard from '@/component/BookCard.vue';
   display: block;
   height: 0.1rem;
   background-color: var(--color-secondary-100);
+  margin-inline: 1.6rem;
   margin-block: 1.6rem;
   border-radius: 0.4rem;
 }
