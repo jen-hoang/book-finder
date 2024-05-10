@@ -7,16 +7,17 @@ const { q: searchQuery } = route.query;
 </script>
 <template>
   <MainHeader />
-  <main :class="[$style['search-main'], 'f-w-container row']">
-    <section class="col-6 m-auto">
-      <BookCardList :searchQuery="searchQuery" />
+  <main :class="[$style['search-main']]">
+    <section class="row f-w-container">
+      <div class="col-6 m-auto">
+        <BookCardList :searchQuery="searchQuery" />
+      </div>
     </section>
   </main>
 </template>
 <style module>
 .search-main > section:first-child {
   padding-top: 0.8rem;
-  padding-inline: 0.8rem;
   overflow-y: auto;
   max-height: calc(100vh - 9.8rem - 2.4rem);
 }

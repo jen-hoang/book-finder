@@ -2,7 +2,7 @@
 import BookCard from '@/component/BookCard.vue';
 </script>
 <template>
-  <ul :class="[$style['book-list']]">
+  <ul :class="[$style['book-list']]" v-bind="$attrs">
     <li>
       <BookCard />
     </li>
@@ -19,7 +19,6 @@ import BookCard from '@/component/BookCard.vue';
 </template>
 <style module>
 .book-list {
-  padding: 0;
   padding-bottom: 2.4rem;
 }
 .book-list > li {
