@@ -15,6 +15,9 @@ const { q: searchQuery } = route.query;
 </template>
 <style module>
 .search-main > section:first-child {
-  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  padding-inline: 0.8rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 9.8rem - 2.4rem);
 }
 </style>
