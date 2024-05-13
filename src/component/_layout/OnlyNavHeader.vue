@@ -2,7 +2,7 @@
 <template>
   <header class="f-w-container">
     <nav :class="$style['nav-bar']">
-      <a href="/about" class="sub-heading-1">About</a>
+      <a href="/about" class="sub-heading">About</a>
     </nav>
   </header>
 </template>

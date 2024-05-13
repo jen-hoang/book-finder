@@ -44,7 +44,7 @@ const showBookDetail = ref(true);
 </template>
 <style module>
 .search-main > section:first-child {
-  padding-top: 0.8rem;
+  padding-top: 1.6rem;
   overflow-y: auto;
   max-height: calc(100vh - 9.8rem - 2.4rem);
 }

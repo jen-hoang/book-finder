@@ -23,6 +23,7 @@ const iconName = computed(() => {
   const nameList = {
     search: 'search-normal-2',
     cancel: 'x-circle',
+    close: 'x',
   };
   return nameList[props.name];
 });

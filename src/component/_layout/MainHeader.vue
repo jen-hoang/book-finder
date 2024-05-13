@@ -11,7 +11,7 @@ import BookSearchBar from '@/component/BookSearchBar.vue';
       <BookSearchBar class="col-6" />
 
       <nav class="col-2 d-flex align-center flex-end">
-        <a href="/about" class="sub-heading-1">About</a>
+        <a href="/about" class="text-body-large">About</a>
       </nav>
     </div>
   </header>

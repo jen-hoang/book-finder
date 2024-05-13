@@ -22,10 +22,10 @@ const value = {
         <h2 class="heading-2">
           {{ value.title }}
         </h2>
-        <p class="text-body-large">
+        <p class="text-body-medium">
           {{ value.subtitle }}
         </p>
-        <AuthorList :list="value.author" />
+        <AuthorList :list="value.author" class="text-body-small" />
       </header>
 
       <section>
@@ -42,6 +42,7 @@ const value = {
   gap: 1.6rem;
   padding: 1.6rem;
   cursor: pointer;
+  border-radius: 0.4rem;
   transition:
     transform 0.3s,
     box-shadow 0.3s,
@@ -51,9 +52,8 @@ const value = {
   padding-block: 1.5rem;
   border: 0.1rem solid var(--color-secondary-600);
   background-color: var(--color-primary-100);
-  border-radius: 0.4rem;
   transform: translate(-0.8rem, -0.8rem);
-  box-shadow: 0.8rem 0.8rem 0rem var(--color-secondary-600);
+  box-shadow: 0.8rem 0.8rem 0rem var(--color-secondary-700);
 }
 .book-card figure img {
   border: 0.1rem solid var(--color-secondary-100);

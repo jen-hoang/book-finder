@@ -20,6 +20,6 @@ const props = defineProps({
 }
 .tag-list > li {
   border: 0.1rem solid var(--color-secondary-200);
-  padding: 0.8rem;
+  padding: 0.8rem 1.2rem;
 }
 </style>
