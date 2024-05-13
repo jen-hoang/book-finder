@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import MainHeader from '@/component/_layout/MainHeader.vue';
 import BookCardList from '@/component/BookCardList.vue';
 import BookDetail from '@/component/BookDetail.vue';
 import BaseLoader from '@/component/BaseLoader.vue';
+import EmptyResult from '@/component/EmptyResult.vue';
 import { formatSearch } from '@/api/book-format';
 
 const props = defineProps({
@@ -12,6 +13,7 @@ const props = defineProps({
 const maxLimit = 20;
 const isLoadingResult = ref(true);
 const searchResult = ref([]);
+const isEmptyResult = computed(() => searchResult.value.length == 0 && !isLoadingResult.value);
 const getSearchResult = async () => {
   isLoadingResult.value = true;
   try {
@@ -102,6 +104,9 @@ const closeBookDetail = () => {
         <div v-if="isLoadingResult">
           <BaseLoader class="m-auto" />
         </div>
+        <div :class="[$style['empty-list'], 'm-auto d-flex']">
+          <EmptyResult v-if="isEmptyResult" />
+        </div>
       </div>
     </section>
     <Transition name="slide-fade" :class="$style['detail-transition']">
@@ -121,6 +126,11 @@ const closeBookDetail = () => {
   overflow-y: auto;
 
   transition: transform 0.6s;
+}
+.search-main .empty-list {
+  height: 56vh;
+  align-items: center;
+  justify-content: center;
 }
 .expanded {
   --base-gap: 0.4rem;
