@@ -3,6 +3,7 @@ import { ref, onMounted, watch } from 'vue';
 import MainHeader from '@/component/_layout/MainHeader.vue';
 import BookCardList from '@/component/BookCardList.vue';
 import BookDetail from '@/component/BookDetail.vue';
+import BaseLoader from '@/component/BaseLoader.vue';
 import { formatSearch } from '@/api/book-format';
 
 const props = defineProps({
@@ -10,21 +11,31 @@ const props = defineProps({
 });
 const maxLimit = 20;
 const isLoadingResult = ref(false);
-const searchResult = ref({});
+const searchResult = ref([]);
 const getSearchResult = async () => {
   isLoadingResult.value = true;
   try {
     // fetch search result
     const query = props.query;
+    const startIndex = searchResult.value.length;
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxLimit}`,
+      `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxLimit}&startIndex=${startIndex}`,
     );
     const data = await response.json();
-    searchResult.value = formatSearch(data);
+    searchResult.value = searchResult.value.concat(formatSearch(data));
   } catch (error) {
     console.error(error);
   } finally {
     isLoadingResult.value = false;
+  }
+};
+
+const getSearchResultOnScroll = (element) => {
+  const bookList = element.target;
+  if (!bookList) return;
+  const { scrollTop, scrollHeight, clientHeight } = bookList;
+  if (scrollTop + clientHeight >= scrollHeight - 100) {
+    getSearchResult();
   }
 };
 
@@ -71,6 +82,7 @@ const closeBookDetail = () => {
           'col-5': showBookDetail,
         },
       ]"
+      @scroll="getSearchResultOnScroll"
     >
       <div
         :class="[
@@ -79,8 +91,11 @@ const closeBookDetail = () => {
           },
         ]"
       >
+        <div>
+          <BaseLoader class="m-auto" />
+        </div>
         <BookCardList
-          :list="searchResult.items"
+          :list="searchResult"
           @click:item="expandBookDetail($event)"
           :active-index="currentActiveIndex"
         />
@@ -99,7 +114,7 @@ const closeBookDetail = () => {
   max-height: calc(100vh - 9.8rem - 1.2rem);
 }
 .search-main > section:first-child {
-  padding-top: 1.2rem;
+  padding-top: 1.6rem;
   overflow-y: auto;
 
   transition: transform 0.6s;
