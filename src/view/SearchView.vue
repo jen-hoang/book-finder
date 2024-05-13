@@ -10,7 +10,7 @@ const props = defineProps({
   query: String,
 });
 const maxLimit = 20;
-const isLoadingResult = ref(false);
+const isLoadingResult = ref(true);
 const searchResult = ref([]);
 const getSearchResult = async () => {
   isLoadingResult.value = true;
@@ -44,10 +44,13 @@ const activeItem = ref({});
 onMounted(() => {
   getSearchResult();
 });
-
+const resetResult = () => {
+  searchResult.value = [];
+};
 watch(
   () => props.query,
   () => {
+    resetResult();
     getSearchResult();
   },
 );

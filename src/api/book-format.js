@@ -19,6 +19,7 @@ const formatBook = (bookItem) => {
   };
 };
 function formatSearch(bookList) {
+  if (!bookList) return [];
   return bookList.items.map(formatBook);
 }
 export { formatBook, formatSearch };
