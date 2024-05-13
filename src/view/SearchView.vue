@@ -1,18 +1,55 @@
 <script setup>
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, onMounted, watch } from 'vue';
 import MainHeader from '@/component/_layout/MainHeader.vue';
 import BookCardList from '@/component/BookCardList.vue';
 import BookDetail from '@/component/BookDetail.vue';
-const route = useRoute();
-const { q: searchQuery } = route.query;
+import { formatSearch } from '@/api/book-format';
+
+const props = defineProps({
+  query: String,
+});
+const maxLimit = 20;
+const isLoadingResult = ref(false);
+const searchResult = ref({});
+const getSearchResult = async () => {
+  isLoadingResult.value = true;
+  try {
+    // fetch search result
+    const query = props.query;
+    const response = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxLimit}`,
+    );
+    const data = await response.json();
+    searchResult.value = formatSearch(data);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    isLoadingResult.value = false;
+  }
+};
+
+const currentActiveIndex = ref(0);
+const activeItem = ref({});
+onMounted(() => {
+  getSearchResult();
+});
+
+watch(
+  () => props.query,
+  () => {
+    getSearchResult();
+  },
+);
+
 const showBookDetail = ref(false);
 
-const expandBookDetail = (item) => {
-  console.log('expandBookDetail', item);
+const expandBookDetail = ({ item, index }) => {
+  currentActiveIndex.value = index;
+  activeItem.value = item;
   showBookDetail.value = true;
 };
 const closeBookDetail = () => {
+  currentActiveIndex.value = -1;
   showBookDetail.value = false;
 };
 </script>
@@ -42,12 +79,16 @@ const closeBookDetail = () => {
           },
         ]"
       >
-        <BookCardList :searchQuery="searchQuery" @click:item="expandBookDetail" />
+        <BookCardList
+          :list="searchResult.items"
+          @click:item="expandBookDetail($event)"
+          :active-index="currentActiveIndex"
+        />
       </div>
     </section>
     <Transition name="slide-fade" :class="$style['detail-transition']">
       <section v-show="showBookDetail" class="col-7">
-        <BookDetail @click:close="closeBookDetail" />
+        <BookDetail :value="activeItem" @click:close="closeBookDetail" />
       </section>
     </Transition>
   </main>
@@ -55,12 +96,16 @@ const closeBookDetail = () => {
 <style module>
 .search-main > section {
   overflow-y: auto;
+  max-height: calc(100vh - 9.8rem - 1.2rem);
 }
 .search-main > section:first-child {
   padding-top: 1.2rem;
   overflow-y: auto;
-  max-height: calc(100vh - 9.8rem - 2.4rem);
+
   transition: transform 0.6s;
+}
+.expanded {
+  --base-gap: 0.4rem;
 }
 .expanded > section:first-child {
   transform: translateX(-1.6rem);

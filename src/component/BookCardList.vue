@@ -2,23 +2,25 @@
 import BookCard from '@/component/BookCard.vue';
 const emit = defineEmits(['click:item']);
 
-const clickItem = (item) => {
-  emit('click:item', item);
+const props = defineProps({
+  list: Array,
+  activeIndex: Number,
+});
+
+const clickItem = (item, index) => {
+  emit('click:item', {
+    item,
+    index,
+  });
+};
+const isItemActive = (index) => {
+  return index == props.activeIndex;
 };
 </script>
 <template>
   <ul :class="[$style['book-list']]" v-bind="$attrs">
-    <li @click="clickItem">
-      <BookCard />
-    </li>
-    <li>
-      <BookCard />
-    </li>
-    <li>
-      <BookCard />
-    </li>
-    <li>
-      <BookCard />
+    <li v-for="(item, index) in props.list" :key="index" @click="clickItem(item, index)">
+      <BookCard :value="item" :is-active="isItemActive(index)" />
     </li>
   </ul>
 </template>
