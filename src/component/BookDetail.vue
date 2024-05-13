@@ -20,7 +20,7 @@ const value = computed(() => props.value);
     <BaseIconButton icon="close" :class="[$style['close-button']]" @click="close" />
     <header class="d-flex">
       <figure>
-        <img :src="value.img" alt="book cover" class="rounded" />
+        <img :src="value.largeImg" alt="book cover" class="rounded" />
       </figure>
       <div :class="[$style['book-metadata']]">
         <div>
@@ -30,7 +30,7 @@ const value = computed(() => props.value);
           <p class="text-body-large">
             {{ value.subtitle }}
           </p>
-          <AuthorList :list="value.author" class="text-body-small" />
+          <AuthorList :list="value.authors" class="text-body-small" />
         </div>
         <TagList :list="value.categories" />
       </div>

@@ -4,7 +4,8 @@ const formatBook = (bookItem) => {
     volumeInfo;
 
   const year = publishedDate ? publishedDate.split('-')[0] : '';
-  const img = imageLinks ? imageLinks.thumbnail : '';
+  const img = imageLinks ? imageLinks.smallThumbnail : '';
+  const largeImg = imageLinks ? imageLinks.thumbnail : '';
   return {
     id,
     title,
@@ -13,13 +14,11 @@ const formatBook = (bookItem) => {
     year,
     description,
     img,
+    largeImg,
     categories,
   };
 };
 function formatSearch(bookList) {
-  return {
-    total: bookList.totalItems,
-    items: bookList.items.map(formatBook),
-  };
+  return bookList.items.map(formatBook);
 }
 export { formatBook, formatSearch };
