@@ -12,7 +12,7 @@ const value = {
 };
 </script>
 <template>
-  <article :class="[$style['book-card'], 'd-flex']">
+  <article :class="[$style['book-card'], 'd-flex']" tabindex="1">
     <figure>
       <img :src="value.img" alt="book cover" class="rounded" />
     </figure>
@@ -54,6 +54,14 @@ const value = {
   background-color: var(--color-primary-100);
   transform: translate(-0.8rem, -0.8rem);
   box-shadow: 0.8rem 0.8rem 0rem var(--color-secondary-700);
+}
+.book-card:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+.book-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem var(--color-active);
 }
 .book-card figure img {
   border: 0.1rem solid var(--color-secondary-100);

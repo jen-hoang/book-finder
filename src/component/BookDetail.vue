@@ -3,6 +3,10 @@ import BaseIconButton from '@/component/BaseIconButton.vue';
 import AuthorList from '@/component/AuthorList.vue';
 import TagList from '@/component/TagList.vue';
 import BaseButton from '@/component/BaseButton.vue';
+const emit = defineEmits(['click:close']);
+const close = () => {
+  emit('click:close');
+};
 const value = {
   title: 'Design Patterns ksj fsk ksj fsd;f sfkk sjkK sfk sjf f skfjsk',
   subtitle: 'Elements of Reusable Object-Oriented Software',
@@ -15,7 +19,7 @@ const value = {
 </script>
 <template>
   <article :class="[$style['book-detail'], 'rounded']">
-    <BaseIconButton icon="close" :class="[$style['close-button']]" />
+    <BaseIconButton icon="close" :class="[$style['close-button']]" @click="close" />
     <header class="d-flex">
       <figure>
         <img :src="value.img" alt="book cover" class="rounded" />

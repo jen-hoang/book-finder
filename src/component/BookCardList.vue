@@ -1,9 +1,14 @@
 <script setup>
 import BookCard from '@/component/BookCard.vue';
+const emit = defineEmits(['click:item']);
+
+const clickItem = (item) => {
+  emit('click:item', item);
+};
 </script>
 <template>
   <ul :class="[$style['book-list']]" v-bind="$attrs">
-    <li>
+    <li @click="clickItem">
       <BookCard />
     </li>
     <li>

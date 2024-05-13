@@ -78,7 +78,7 @@ p {
   flex-flow: row wrap;
   justify-content: space-between;
   --columns: 12;
-  --base-gap: var(--base-spacing);
+  --base-gap: calc(var(--base-spacing) * 2);
   --base-basis: calc((100% - (var(--base-gap) * (var(--columns) - 1))) / var(--columns));
 }
 [class*='col-'] {

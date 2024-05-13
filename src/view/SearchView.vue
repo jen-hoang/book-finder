@@ -6,7 +6,15 @@ import BookCardList from '@/component/BookCardList.vue';
 import BookDetail from '@/component/BookDetail.vue';
 const route = useRoute();
 const { q: searchQuery } = route.query;
-const showBookDetail = ref(true);
+const showBookDetail = ref(false);
+
+const expandBookDetail = (item) => {
+  console.log('expandBookDetail', item);
+  showBookDetail.value = true;
+};
+const closeBookDetail = () => {
+  showBookDetail.value = false;
+};
 </script>
 <template>
   <MainHeader />
@@ -15,7 +23,7 @@ const showBookDetail = ref(true);
       $style['search-main'],
       {
         'f-w-container row': showBookDetail,
-        [$style['show-detail']]: showBookDetail,
+        [$style['expanded']]: showBookDetail,
       },
     ]"
   >
@@ -34,22 +42,32 @@ const showBookDetail = ref(true);
           },
         ]"
       >
-        <BookCardList :searchQuery="searchQuery" />
+        <BookCardList :searchQuery="searchQuery" @click:item="expandBookDetail" />
       </div>
     </section>
-    <section v-if="showBookDetail" class="col-7">
-      <BookDetail />
-    </section>
+    <Transition name="slide-fade" :class="$style['detail-transition']">
+      <section v-show="showBookDetail" class="col-7">
+        <BookDetail @click:close="closeBookDetail" />
+      </section>
+    </Transition>
   </main>
 </template>
 <style module>
+.search-main > section {
+  overflow-y: auto;
+}
 .search-main > section:first-child {
-  padding-top: 1.6rem;
+  padding-top: 1.2rem;
   overflow-y: auto;
   max-height: calc(100vh - 9.8rem - 2.4rem);
+  transition: transform 0.6s;
 }
-.show-detail > section:first-child {
+.expanded > section:first-child {
+  transform: translateX(-1.6rem);
   padding-left: 0.8rem;
-  padding-right: 2.4rem;
+  padding-right: 2rem;
+}
+.detail-transition {
+  --translate-x: 4.8rem;
 }
 </style>
