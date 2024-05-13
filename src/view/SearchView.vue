@@ -91,14 +91,14 @@ const closeBookDetail = () => {
           },
         ]"
       >
-        <div>
-          <BaseLoader class="m-auto" />
-        </div>
         <BookCardList
           :list="searchResult"
           @click:item="expandBookDetail($event)"
           :active-index="currentActiveIndex"
         />
+        <div v-if="isLoadingResult">
+          <BaseLoader class="m-auto" />
+        </div>
       </div>
     </section>
     <Transition name="slide-fade" :class="$style['detail-transition']">
