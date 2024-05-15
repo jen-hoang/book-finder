@@ -40,7 +40,7 @@ const value = computed(() => props.value);
       <p class="text-body-medium">{{ value.description }}</p>
     </section>
     <section :class="[$style['action-button']]">
-      <BaseButton :link="value.previewLink">Learn more on Google Book</BaseButton>
+      <BaseButton :link="value.previewLink">Preview on Google Book</BaseButton>
     </section>
   </article>
 </template>
