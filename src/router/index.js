@@ -14,7 +14,7 @@ const router = createRouter({
       name: 'search',
       component: () => import('@/view/SearchView.vue'),
       // Help to guide which query should be passed to this view
-      props: (route) => ({ query: route.query.q, key: route.query.key }),
+      props: (route) => ({ query: route.query.q }),
     },
     {
       path: '/about',
@@ -23,6 +23,11 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('@/view/AboutView.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/view/NotFoundView.vue'),
     },
   ],
 });
