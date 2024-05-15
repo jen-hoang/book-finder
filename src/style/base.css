@@ -3,7 +3,8 @@
   font-size: 62.5%;
 }
 body {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  line-height: 1.25;
   font-family: var(--font-family-main);
   color: var(--color-text-body);
   background-color: var(--color-background);
@@ -14,8 +15,13 @@ a {
 a:hover {
   filter: brightness(120%);
 }
-a:focus {
-  outline-color: var(--color-active-border);
+a:focus-visible {
+  border-radius: 0.4rem;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem var(--color-active);
+}
+nav a {
+  color: var(--color-secondary-300);
 }
 p {
   word-break: break-word;
@@ -25,27 +31,32 @@ p {
   color: var(--color-heading-1);
   font-family: var(--font-family-heading);
   font-size: 3.2rem;
+  line-height: 1.25;
 }
 .heading-2 {
   color: var(--color-heading-2);
   font-family: var(--font-family-heading);
-  font-size: 2.4rem;
+  font-size: 2.6rem;
+  line-height: 1.25;
 }
 .sub-heading {
   font-size: 2.4rem;
 }
-.body-large {
+
+.text-body-large {
+  font-size: 2rem;
+  line-height: 1.25;
+}
+.text-body-medium {
   font-size: 1.8rem;
+  line-height: 1.4;
 }
-.body-medium {
-  font-size: 1.6rem;
-}
-.body-small {
-  font-size: 1.2rem;
-}
-.label {
+.text-body-small {
   font-size: 1.4rem;
-  font-weight: 600;
+}
+.text-label {
+  font-size: 1.6rem;
+  font-weight: 500;
 }
 .text-weight-bold {
   font-weight: 500;
@@ -58,14 +69,16 @@ p {
 .f-w-container {
   width: 100%;
   margin: auto;
+  padding-inline: 6.4rem;
   max-width: var(--max-width);
 }
 .row {
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   --columns: 12;
-  --base-gap: var(--base-spacing);
+  --base-gap: calc(var(--base-spacing) * 2);
   --base-basis: calc((100% - (var(--base-gap) * (var(--columns) - 1))) / var(--columns));
 }
 [class*='col-'] {
@@ -109,4 +122,22 @@ p {
 }
 .col-12 {
   --width: 12;
+}
+/* Flexbox utilities */
+.d-flex {
+  display: flex;
+}
+.align-center {
+  align-items: center;
+}
+.flex-end {
+  justify-content: flex-end;
+}
+/* Spacing */
+.m-auto {
+  margin: auto;
+}
+/* Re-active classes */
+.clickable {
+  cursor: pointer;
 }

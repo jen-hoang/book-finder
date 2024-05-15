@@ -17,6 +17,7 @@
   --color-secondary-400: #495049;
   --color-secondary-500: #193732;
   --color-secondary-600: #11221f;
+  --color-secondary-700: #001512;
 }
 /* Functional color variables */
 :root {
@@ -35,6 +36,6 @@
 /* Other */
 :root {
   --base-spacing: 0.8rem;
-  --max-width: 1400px;
+  --max-width: 1440px;
   --border-radius-base: 0.4rem;
 }

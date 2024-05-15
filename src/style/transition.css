@@ -1,0 +1,12 @@
+/* fade */
+.slide-fade-enter-active {
+  --transition-time: 0.5s;
+  transition: all var(--transition-time) ease-out;
+}
+
+.slide-fade-enter-from {
+  --translate-x: 2.4rem;
+  --opacity: 0;
+  transform: translateX(var(--translate-x));
+  opacity: var(--opacity);
+}

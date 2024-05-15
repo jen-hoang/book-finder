@@ -10,6 +10,13 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/search',
+      name: 'search',
+      component: () => import('@/view/SearchView.vue'),
+      // Help to guide which query should be passed to this view
+      props: (route) => ({ query: route.query.q, key: route.query.key }),
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
