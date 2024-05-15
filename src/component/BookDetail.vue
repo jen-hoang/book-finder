@@ -39,10 +39,8 @@ const value = computed(() => props.value);
       <h2 class="sub-heading text-weight-bold">Overview</h2>
       <p class="text-body-medium">{{ value.description }}</p>
     </section>
-    <section>
-      <BaseButton :class="[$style['action-button'], 'm-auto']"
-        >Learn more on Google Book</BaseButton
-      >
+    <section :class="[$style['action-button']]">
+      <BaseButton :link="value.previewLink">Learn more on Google Book</BaseButton>
     </section>
   </article>
 </template>
@@ -86,6 +84,6 @@ const value = computed(() => props.value);
   color: var(--color-secondary-500);
 }
 .action-button {
-  display: block;
+  margin-inline: auto;
 }
 </style>

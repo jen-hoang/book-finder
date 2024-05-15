@@ -57,7 +57,7 @@ const value = computed(() => props.value);
     background-color 0.1s;
 }
 .book-card:hover {
-  padding-block: 1.5rem;
+  padding: 1.5rem;
   border: 0.1rem solid var(--color-secondary-600);
   background-color: var(--color-primary-100);
   transform: translate(-0.8rem, -0.8rem);
