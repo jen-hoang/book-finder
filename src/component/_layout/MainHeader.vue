@@ -5,13 +5,19 @@ import BookSearchBar from '@/component/BookSearchBar.vue';
   <header :class="[$style['main-header'], 'f-w-container d-flex align-center']">
     <div class="row">
       <a href="/" :class="[$style['logo'], 'col-2 d-flex align-center']">
-        <img src="@/asset/logo/logo.svg" alt="logo" />
+        <img src="@/asset/logo.svg" alt="logo" />
       </a>
 
       <BookSearchBar class="col-6" />
 
       <nav class="col-2 d-flex align-center flex-end">
-        <a href="/about" class="text-body-large">About</a>
+        <RouterLink
+          :to="{
+            name: 'about',
+          }"
+          class="text-body-large"
+          >About</RouterLink
+        >
       </nav>
     </div>
   </header>
