@@ -7,7 +7,7 @@ import BookSearchBar from '@/component/BookSearchBar.vue';
   <main class="f-w-container">
     <div :class="[$style['home-content'], 'row']">
       <div class="col-6 m-auto">
-        <img src="@/asset/logo/logo.svg" alt="logo" :class="[$style['home-logo']]" />
+        <img src="@/asset/logo.svg" alt="logo" :class="[$style['home-logo']]" />
         <BookSearchBar />
       </div>
     </div>
