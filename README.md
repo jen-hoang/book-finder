@@ -1,21 +1,37 @@
 # Book Finder
 
-## Prerequisite
+Book Finder is a Web App made by Vue 3 that search for books via Google Book API.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-[Nodenv](https://github.com/nodenv/nodenv)
+## Table of Contents
 
-## Customize configuration
+- [Features](#features)
+- [Development process](#development-process)
+- [Project setup](#project-setup)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Features
+
+- Search books by keyword
+- Get more result by keep scrolling (infinite scrolling)
+- Expand more detail on the side of the search page
+
+## Development process
 
 ## Project Setup
+
+### Prerequisite
+
+In order to install proper Node version automatically, I recommend using [Nodenv](https://github.com/nodenv/nodenv).
+If you want to use `nvm`, please check Node version in `.node-version` file.
+
+### Installation
 
 ```sh
 npm install
 ```
 
-### Set up Pre-commit hook
+### Set up Pre-commit hook (optional)
+
+Only needed if you want to make a change on the code and want to run code linting before commit
 
 ```sh
 npm run prepare
@@ -26,6 +42,8 @@ npm run prepare
 ```sh
 npm run dev
 ```
+
+The project will be serve at <http://localhost:4000/>
 
 ### Compile and Minify for Production
 
