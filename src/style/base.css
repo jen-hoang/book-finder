@@ -71,6 +71,18 @@ p {
   margin: auto;
   padding-inline: 6.4rem;
   max-width: var(--max-width);
+  @media screen and (max-width: 1200px) {
+    padding-inline: 4.8rem;
+  }
+  @media screen and (max-width: 992px) {
+    padding-inline: 3.2rem;
+  }
+  @media screen and (max-width: 780px) {
+    padding-inline: 2.4rem;
+  }
+  @media screen and (max-width: 576px) {
+    padding-inline: 1.6rem;
+  }
 }
 .row {
   width: 100%;
