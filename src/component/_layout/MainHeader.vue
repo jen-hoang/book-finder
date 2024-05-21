@@ -4,13 +4,13 @@ import BookSearchBar from '@/component/BookSearchBar.vue';
 <template>
   <header :class="[$style['main-header'], 'f-w-container d-flex align-center']">
     <div class="row">
-      <a href="/" :class="[$style['logo'], 'col-2 d-flex align-center']">
+      <RouterLink :to="{ name: 'home' }" :class="[$style['logo'], 'col-3 d-flex align-center']">
         <img src="@/asset/logo.svg" alt="logo" />
-      </a>
+      </RouterLink>
 
-      <BookSearchBar class="col-6" />
+      <BookSearchBar :class="[$style['search-bar'], 'col-6']" />
 
-      <nav class="col-2 d-flex align-center flex-end">
+      <nav class="col-3 d-flex align-center flex-end">
         <RouterLink
           :to="{
             name: 'about',
@@ -28,9 +28,25 @@ import BookSearchBar from '@/component/BookSearchBar.vue';
 }
 .main-header a img {
   display: block;
+  width: 100%;
   max-width: 20rem;
 }
 .main-header .logo:hover {
   filter: none;
+}
+
+/* responsive */
+@media screen and (max-width: 1200px) {
+  .main-header a img {
+    max-width: 16rem;
+  }
+}
+@media (max-width: 992px) {
+  .search-bar {
+    --width: 7;
+  }
+  .main-header nav {
+    --width: 2;
+  }
 }
 </style>

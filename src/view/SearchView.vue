@@ -143,4 +143,20 @@ const closeBookDetail = () => {
 .detail-transition {
   --translate-x: 4.8rem;
 }
+/* responsive */
+@media (max-width: 992px) {
+  .search-main > section:first-child > div {
+    --width: 8;
+  }
+}
+@media (max-width: 780px) {
+  .search-main > section:first-child > div {
+    --width: 10;
+  }
+}
+@media (max-width: 576px) {
+  .search-main > section:first-child > div {
+    --width: 12;
+  }
+}
 </style>
