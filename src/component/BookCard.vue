@@ -59,7 +59,7 @@ const value = computed(() => props.value);
   container-name: book-card;
 }
 .book-card:hover {
-  padding: 1.5rem;
+  padding: 1.6rem;
   border: 0.1rem solid var(--color-secondary-600);
   background-color: var(--color-primary-100);
   transform: translate(-0.8rem, -0.8rem);
@@ -74,7 +74,7 @@ const value = computed(() => props.value);
   box-shadow: 0 0 0 0.2rem var(--color-active);
 }
 .active {
-  padding-block: 1.5rem;
+  padding-block: 1.6rem;
   border: 0.1rem solid var(--color-secondary-200);
   background-color: var(--color-primary-200);
 }
