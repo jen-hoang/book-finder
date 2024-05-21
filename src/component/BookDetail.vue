@@ -53,6 +53,7 @@ const value = computed(() => props.value);
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  position: relative;
 }
 .close-button {
   position: absolute;

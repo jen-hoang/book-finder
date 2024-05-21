@@ -9,4 +9,8 @@
   --opacity: 0;
   transform: translateX(var(--translate-x));
   opacity: var(--opacity);
+  @media (max-width: 576px) {
+    --translate-y: 3.2rem;
+    transform: translateY(var(--translate-y));
+  }
 }

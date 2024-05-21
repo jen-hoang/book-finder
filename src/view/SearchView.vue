@@ -11,10 +11,11 @@ const props = defineProps({
   query: String,
 });
 const maxLimit = 20;
-const isLoadingResult = ref(true);
+const isLoadingResult = ref(false);
 const searchResult = ref([]);
 const isEmptyResult = computed(() => searchResult.value.length == 0 && !isLoadingResult.value);
 const getSearchResult = async () => {
+  if (isLoadingResult.value) return;
   isLoadingResult.value = true;
   try {
     // fetch search result
@@ -41,13 +42,14 @@ const getSearchResultOnScroll = (element) => {
   }
 };
 
-const currentActiveIndex = ref(0);
+const currentActiveIndex = ref(-1);
 const activeItem = ref({});
 onMounted(() => {
   getSearchResult();
 });
 const resetResult = () => {
   searchResult.value = [];
+  currentActiveIndex.value = -1;
 };
 watch(
   () => props.query,
@@ -110,7 +112,7 @@ const closeBookDetail = () => {
       </div>
     </section>
     <Transition name="slide-fade" :class="$style['detail-transition']">
-      <section v-show="showBookDetail" class="col-7">
+      <section v-show="showBookDetail" class="col-7" @click.self="closeBookDetail">
         <BookDetail :value="activeItem" @click:close="closeBookDetail" />
       </section>
     </Transition>
@@ -124,7 +126,6 @@ const closeBookDetail = () => {
 .search-main > section:first-child {
   padding-top: 1.6rem;
   overflow-y: auto;
-
   transition: transform 0.6s;
 }
 .search-main .empty-list {
@@ -155,8 +156,28 @@ const closeBookDetail = () => {
   }
 }
 @media (max-width: 576px) {
+  .search-main > section {
+    max-height: calc(100vh - 14.4rem - 1.2rem);
+  }
   .search-main > section:first-child > div {
     --width: 12;
+  }
+  .expanded > section:first-child {
+    --width: 12;
+    padding-inline: 0;
+    transform: translateX(0rem);
+  }
+  .expanded > section:last-child {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    max-height: 100vh;
+    background-color: rgba(17, 34, 31, 80%);
+    overflow-y: auto;
+    padding-block: 2.4rem;
   }
 }
 </style>
