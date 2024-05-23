@@ -27,6 +27,17 @@ import BookSearchBar from '@/component/BookSearchBar.vue';
 .home-logo {
   display: block;
   margin: auto;
+  width: 90%;
   margin-bottom: 3.2rem;
+}
+@media screen and (max-width: 780px) {
+  .home-content > div {
+    --width: 9;
+  }
+}
+@media screen and (max-width: 576px) {
+  .home-content > div {
+    --width: 12;
+  }
 }
 </style>

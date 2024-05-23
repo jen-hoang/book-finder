@@ -2,24 +2,22 @@
 import BookSearchBar from '@/component/BookSearchBar.vue';
 </script>
 <template>
-  <header :class="[$style['main-header'], 'f-w-container d-flex align-center']">
-    <div class="row">
-      <a href="/" :class="[$style['logo'], 'col-2 d-flex align-center']">
-        <img src="@/asset/logo.svg" alt="logo" />
-      </a>
+  <header :class="[$style['main-header'], 'f-w-container row align-center']">
+    <RouterLink :to="{ name: 'home' }" :class="[$style['logo'], 'col-3 d-flex align-center']">
+      <img src="@/asset/logo.svg" alt="logo" />
+    </RouterLink>
 
-      <BookSearchBar class="col-6" />
+    <BookSearchBar :class="[$style['search-bar'], 'col-6']" />
 
-      <nav class="col-2 d-flex align-center flex-end">
-        <RouterLink
-          :to="{
-            name: 'about',
-          }"
-          class="text-body-large"
-          >About</RouterLink
-        >
-      </nav>
-    </div>
+    <nav class="col-3 d-flex align-center flex-end">
+      <RouterLink
+        :to="{
+          name: 'about',
+        }"
+        class="text-body-large"
+        >About</RouterLink
+      >
+    </nav>
   </header>
 </template>
 <style module>
@@ -28,9 +26,40 @@ import BookSearchBar from '@/component/BookSearchBar.vue';
 }
 .main-header a img {
   display: block;
+  width: 100%;
   max-width: 20rem;
 }
 .main-header .logo:hover {
   filter: none;
+}
+
+/* responsive */
+@media (max-width: 992px) {
+  .search-bar {
+    --width: 7;
+  }
+  .main-header nav {
+    --width: 1;
+  }
+}
+@media (max-width: 576px) {
+  .main-header {
+    height: 15.2rem;
+    padding-block: 2rem;
+    align-content: space-between;
+  }
+  .search-bar {
+    order: 3;
+    --width: 12;
+  }
+  .logo {
+    --width: 8;
+  }
+  .main-header nav {
+    --width: 2;
+  }
+  .main-header nav a {
+    font-size: 1.6rem;
+  }
 }
 </style>

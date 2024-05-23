@@ -1,0 +1,20 @@
+@media screen and (max-width: 1200px) {
+  .f-w-container {
+    padding-inline: 4.8rem;
+  }
+}
+@media screen and (max-width: 992px) {
+  .f-w-container {
+    padding-inline: 3.2rem;
+  }
+}
+@media screen and (max-width: 780px) {
+  .f-w-container {
+    padding-inline: 2.4rem;
+  }
+}
+@media screen and (max-width: 576px) {
+  .f-w-container {
+    padding-inline: 1.6rem;
+  }
+}

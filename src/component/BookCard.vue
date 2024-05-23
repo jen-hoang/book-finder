@@ -55,6 +55,8 @@ const value = computed(() => props.value);
     transform 0.3s,
     box-shadow 0.3s,
     background-color 0.1s;
+  container-type: inline-size;
+  container-name: book-card;
 }
 .book-card:hover {
   padding: 1.5rem;
@@ -72,14 +74,19 @@ const value = computed(() => props.value);
   box-shadow: 0 0 0 0.2rem var(--color-active);
 }
 .active {
-  padding-block: 1.5rem;
+  padding: 1.5rem;
   border: 0.1rem solid var(--color-secondary-200);
   background-color: var(--color-primary-200);
 }
+.book-card figure {
+  flex-basis: 22%;
+}
 .book-card figure img {
+  width: 100%;
   border: 0.1rem solid var(--color-secondary-100);
 }
 .content {
+  flex-basis: 78%;
   flex-direction: column;
   gap: 0.8rem;
 }
@@ -96,5 +103,16 @@ const value = computed(() => props.value);
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+@container book-card (max-width: 380px) {
+  .content {
+    flex-basis: 70%;
+  }
+  .content p {
+    -webkit-line-clamp: 4;
+  }
+  .book-card figure {
+    flex-basis: 30%;
+  }
 }
 </style>
