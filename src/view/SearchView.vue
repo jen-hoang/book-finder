@@ -5,6 +5,7 @@ import BookCardList from '@/component/BookCardList.vue';
 import BookDetail from '@/component/BookDetail.vue';
 import BaseLoader from '@/component/BaseLoader.vue';
 import EmptyResult from '@/component/EmptyResult.vue';
+import { searchBook } from '@/api/book-request';
 import { formatSearch } from '@/api/book-format';
 
 const props = defineProps({
@@ -21,10 +22,11 @@ const getSearchResult = async () => {
     // fetch search result
     const query = props.query;
     const startIndex = searchResult.value.length;
-    const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxLimit}&startIndex=${startIndex}`,
-    );
-    const data = await response.json();
+    const data = await searchBook({
+      query,
+      startIndex,
+      maxLimit,
+    });
     searchResult.value = searchResult.value.concat(formatSearch(data));
   } catch (error) {
     console.error(error);
