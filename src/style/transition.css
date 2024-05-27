@@ -14,3 +14,14 @@
     transform: translateY(var(--translate-y));
   }
 }
+/* Slide in */
+.slide-in-enter-active {
+  --transition-time: 0.5s;
+  transition: all var(--transition-time) ease-in-out;
+}
+
+.slide-in-enter-from {
+  --translate-x: -2.4rem;
+  opacity: 0;
+  transform: translateX(var(--translate-x));
+}

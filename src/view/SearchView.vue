@@ -5,14 +5,27 @@ import BookCardList from '@/component/BookCardList.vue';
 import BookDetail from '@/component/BookDetail.vue';
 import BaseLoader from '@/component/BaseLoader.vue';
 import EmptyResult from '@/component/EmptyResult.vue';
+import BaseErrorAlert from '@/component/BaseErrorAlert.vue';
+import { searchBook } from '@/api/book-request';
 import { formatSearch } from '@/api/book-format';
+import { handleScroll } from '@/util/scroll';
+import { useActiveIndexRef, useBooleanRef, useScrollListRef } from '@/composable/use-ref';
 
+// Define props
 const props = defineProps({
   query: String,
 });
+
+// Define constants
 const maxLimit = 20;
 const isLoadingResult = ref(false);
-const searchResult = ref([]);
+
+// Search result list
+const {
+  list: searchResult,
+  resetList: resetSearchResult,
+  addItem: addSearchResult,
+} = useScrollListRef();
 const isEmptyResult = computed(() => searchResult.value.length == 0 && !isLoadingResult.value);
 const getSearchResult = async () => {
   if (isLoadingResult.value) return;
@@ -21,36 +34,26 @@ const getSearchResult = async () => {
     // fetch search result
     const query = props.query;
     const startIndex = searchResult.value.length;
-    const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxLimit}&startIndex=${startIndex}`,
-    );
-    const data = await response.json();
-    searchResult.value = searchResult.value.concat(formatSearch(data));
-  } catch (error) {
-    console.error(error);
+    const data = await searchBook({
+      query,
+      startIndex,
+      maxLimit,
+    });
+    addSearchResult(formatSearch(data));
   } finally {
     isLoadingResult.value = false;
   }
 };
-
-const getSearchResultOnScroll = (element) => {
-  const bookList = element.target;
-  if (!bookList) return;
-  const { scrollTop, scrollHeight, clientHeight } = bookList;
-  if (scrollTop + clientHeight >= scrollHeight - 100) {
-    getSearchResult();
-  }
+const resetResult = () => {
+  resetSearchResult();
+  resetActiveIndex();
 };
 
-const currentActiveIndex = ref(-1);
-const activeItem = ref({});
 onMounted(() => {
   getSearchResult();
 });
-const resetResult = () => {
-  searchResult.value = [];
-  currentActiveIndex.value = -1;
-};
+const getSearchResultOnScroll = handleScroll(getSearchResult);
+
 watch(
   () => props.query,
   () => {
@@ -59,64 +62,77 @@ watch(
   },
 );
 
-const showBookDetail = ref(false);
+// Active item and display book detail
+const {
+  list: currentActiveIndex,
+  resetIndex: resetActiveIndex,
+  setIndex: setActiveIndex,
+} = useActiveIndexRef();
+
+const activeItem = ref({});
+const {
+  value: showBookDetail,
+  setTrue: displayBookDetail,
+  setFalse: hideBookDetail,
+} = useBooleanRef();
 
 const expandBookDetail = ({ item, index }) => {
-  currentActiveIndex.value = index;
   activeItem.value = item;
-  showBookDetail.value = true;
+  setActiveIndex(index);
+  displayBookDetail();
 };
 const closeBookDetail = () => {
-  currentActiveIndex.value = -1;
-  showBookDetail.value = false;
+  resetActiveIndex();
+  hideBookDetail();
 };
 </script>
 <template>
-  <MainHeader />
-  <main
-    :class="[
-      $style['search-main'],
-      {
-        'f-w-container row': showBookDetail,
-        [$style['expanded']]: showBookDetail,
-      },
-    ]"
-  >
-    <section
+  <base-error-alert>
+    <MainHeader />
+    <main
       :class="[
+        $style['search-main'],
         {
-          'row f-w-container': !showBookDetail,
-          'col-5': showBookDetail,
+          'f-w-container row': showBookDetail,
+          [$style['expanded']]: showBookDetail,
         },
       ]"
-      @scroll="getSearchResultOnScroll"
     >
-      <div
+      <section
         :class="[
           {
-            'col-6 m-auto': !showBookDetail,
+            'row f-w-container': !showBookDetail,
+            'col-5': showBookDetail,
           },
         ]"
+        @scroll="getSearchResultOnScroll"
       >
-        <BookCardList
-          :list="searchResult"
-          @click:item="expandBookDetail($event)"
-          :active-index="currentActiveIndex"
-        />
-        <div v-if="isLoadingResult">
-          <BaseLoader class="m-auto" />
+        <div
+          :class="[
+            {
+              'col-6 m-auto': !showBookDetail,
+            },
+          ]"
+        >
+          <BookCardList
+            :list="searchResult"
+            @click:item="expandBookDetail($event)"
+            :active-index="currentActiveIndex"
+          />
+          <div v-if="isLoadingResult">
+            <BaseLoader class="m-auto" />
+          </div>
+          <div :class="[$style['empty-list'], 'm-auto d-flex']">
+            <EmptyResult v-if="isEmptyResult" />
+          </div>
         </div>
-        <div :class="[$style['empty-list'], 'm-auto d-flex']">
-          <EmptyResult v-if="isEmptyResult" />
-        </div>
-      </div>
-    </section>
-    <Transition name="slide-fade" :class="$style['detail-transition']">
-      <section v-show="showBookDetail" class="col-7" @click.self="closeBookDetail">
-        <BookDetail :value="activeItem" @click:close="closeBookDetail" />
       </section>
-    </Transition>
-  </main>
+      <Transition name="slide-fade">
+        <section v-show="showBookDetail" class="col-7" @click.self="closeBookDetail">
+          <BookDetail :value="activeItem" @click:close="closeBookDetail" />
+        </section>
+      </Transition></main
+  ></base-error-alert>
 </template>
 <style module>
 .search-main > section {
@@ -140,9 +156,6 @@ const closeBookDetail = () => {
   transform: translateX(-1.6rem);
   padding-left: 0.8rem;
   padding-right: 2rem;
-}
-.detail-transition {
-  --translate-x: 4.8rem;
 }
 /* responsive */
 @media (max-width: 992px) {
