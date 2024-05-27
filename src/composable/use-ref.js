@@ -16,7 +16,7 @@ const useRefHelper = (initialValue) => {
  * @param {boolean} initialValue
  * @param {function} trueCb: callback function when value is true
  * @param {function} falseCb: callback function when value is false
- * @returns {object} { ref, setTrue, setFalse }
+ * @returns {object} { value, setTrue, setFalse }
  */
 const useBooleanRef = (initialValue = false) => {
   const { value, setValue } = useRefHelper(initialValue);
