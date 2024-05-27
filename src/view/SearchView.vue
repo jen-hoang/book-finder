@@ -7,13 +7,24 @@ import BaseLoader from '@/component/BaseLoader.vue';
 import EmptyResult from '@/component/EmptyResult.vue';
 import { searchBook } from '@/api/book-request';
 import { formatSearch } from '@/api/book-format';
+import { handleScroll } from '@/util/scroll';
+import { useActiveIndexRef, useBooleanRef, useScrollListRef } from '@/composable/use-ref';
 
+// Define props
 const props = defineProps({
   query: String,
 });
+
+// Define constants
 const maxLimit = 20;
 const isLoadingResult = ref(false);
-const searchResult = ref([]);
+
+// Search result list
+const {
+  list: searchResult,
+  resetList: resetSearchResult,
+  addItem: addSearchResult,
+} = useScrollListRef();
 const isEmptyResult = computed(() => searchResult.value.length == 0 && !isLoadingResult.value);
 const getSearchResult = async () => {
   if (isLoadingResult.value) return;
@@ -27,32 +38,21 @@ const getSearchResult = async () => {
       startIndex,
       maxLimit,
     });
-    searchResult.value = searchResult.value.concat(formatSearch(data));
-  } catch (error) {
-    console.error(error);
+    addSearchResult(formatSearch(data));
   } finally {
     isLoadingResult.value = false;
   }
 };
-
-const getSearchResultOnScroll = (element) => {
-  const bookList = element.target;
-  if (!bookList) return;
-  const { scrollTop, scrollHeight, clientHeight } = bookList;
-  if (scrollTop + clientHeight >= scrollHeight - 100) {
-    getSearchResult();
-  }
+const resetResult = () => {
+  resetSearchResult();
+  resetActiveIndex();
 };
 
-const currentActiveIndex = ref(-1);
-const activeItem = ref({});
 onMounted(() => {
   getSearchResult();
 });
-const resetResult = () => {
-  searchResult.value = [];
-  currentActiveIndex.value = -1;
-};
+const getSearchResultOnScroll = handleScroll(getSearchResult);
+
 watch(
   () => props.query,
   () => {
@@ -61,16 +61,28 @@ watch(
   },
 );
 
-const showBookDetail = ref(false);
+// Active item and display book detail
+const {
+  list: currentActiveIndex,
+  resetIndex: resetActiveIndex,
+  setIndex: setActiveIndex,
+} = useActiveIndexRef();
+
+const activeItem = ref({});
+const {
+  value: showBookDetail,
+  setTrue: displayBookDetail,
+  setFalse: hideBookDetail,
+} = useBooleanRef();
 
 const expandBookDetail = ({ item, index }) => {
-  currentActiveIndex.value = index;
   activeItem.value = item;
-  showBookDetail.value = true;
+  setActiveIndex(index);
+  displayBookDetail();
 };
 const closeBookDetail = () => {
-  currentActiveIndex.value = -1;
-  showBookDetail.value = false;
+  resetActiveIndex();
+  hideBookDetail();
 };
 </script>
 <template>
