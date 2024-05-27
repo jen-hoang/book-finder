@@ -5,6 +5,7 @@ import BookCardList from '@/component/BookCardList.vue';
 import BookDetail from '@/component/BookDetail.vue';
 import BaseLoader from '@/component/BaseLoader.vue';
 import EmptyResult from '@/component/EmptyResult.vue';
+import BaseErrorAlert from '@/component/BaseErrorAlert.vue';
 import { searchBook } from '@/api/book-request';
 import { formatSearch } from '@/api/book-format';
 import { handleScroll } from '@/util/scroll';
@@ -86,51 +87,52 @@ const closeBookDetail = () => {
 };
 </script>
 <template>
-  <MainHeader />
-  <main
-    :class="[
-      $style['search-main'],
-      {
-        'f-w-container row': showBookDetail,
-        [$style['expanded']]: showBookDetail,
-      },
-    ]"
-  >
-    <section
+  <base-error-alert>
+    <MainHeader />
+    <main
       :class="[
+        $style['search-main'],
         {
-          'row f-w-container': !showBookDetail,
-          'col-5': showBookDetail,
+          'f-w-container row': showBookDetail,
+          [$style['expanded']]: showBookDetail,
         },
       ]"
-      @scroll="getSearchResultOnScroll"
     >
-      <div
+      <section
         :class="[
           {
-            'col-6 m-auto': !showBookDetail,
+            'row f-w-container': !showBookDetail,
+            'col-5': showBookDetail,
           },
         ]"
+        @scroll="getSearchResultOnScroll"
       >
-        <BookCardList
-          :list="searchResult"
-          @click:item="expandBookDetail($event)"
-          :active-index="currentActiveIndex"
-        />
-        <div v-if="isLoadingResult">
-          <BaseLoader class="m-auto" />
+        <div
+          :class="[
+            {
+              'col-6 m-auto': !showBookDetail,
+            },
+          ]"
+        >
+          <BookCardList
+            :list="searchResult"
+            @click:item="expandBookDetail($event)"
+            :active-index="currentActiveIndex"
+          />
+          <div v-if="isLoadingResult">
+            <BaseLoader class="m-auto" />
+          </div>
+          <div :class="[$style['empty-list'], 'm-auto d-flex']">
+            <EmptyResult v-if="isEmptyResult" />
+          </div>
         </div>
-        <div :class="[$style['empty-list'], 'm-auto d-flex']">
-          <EmptyResult v-if="isEmptyResult" />
-        </div>
-      </div>
-    </section>
-    <Transition name="slide-fade" :class="$style['detail-transition']">
-      <section v-show="showBookDetail" class="col-7" @click.self="closeBookDetail">
-        <BookDetail :value="activeItem" @click:close="closeBookDetail" />
       </section>
-    </Transition>
-  </main>
+      <Transition name="slide-fade">
+        <section v-show="showBookDetail" class="col-7" @click.self="closeBookDetail">
+          <BookDetail :value="activeItem" @click:close="closeBookDetail" />
+        </section>
+      </Transition></main
+  ></base-error-alert>
 </template>
 <style module>
 .search-main > section {
@@ -154,9 +156,6 @@ const closeBookDetail = () => {
   transform: translateX(-1.6rem);
   padding-left: 0.8rem;
   padding-right: 2rem;
-}
-.detail-transition {
-  --translate-x: 4.8rem;
 }
 /* responsive */
 @media (max-width: 992px) {
