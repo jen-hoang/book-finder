@@ -27,6 +27,8 @@
   --color-text-body: var(--color-secondary-400);
   --color-active-border: var(--color-secondary-600);
   --color-active: var(--color-secondary);
+  /* Other */
+  --color-error-background: #f89e9e;
 }
 /* Typography */
 :root {
