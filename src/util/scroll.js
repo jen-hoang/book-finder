@@ -1,8 +1,8 @@
 const handleScroll = (callback) => (element) => {
+  if (!element || !element.target) return;
   const target = element.target;
-  if (!target) return;
   const { scrollTop, scrollHeight, clientHeight } = target;
-  const isBottom = scrollTop + clientHeight >= scrollHeight - 100;
+  const isBottom = scrollTop + clientHeight >= scrollHeight;
   if (isBottom && typeof callback == 'function') {
     callback();
   }
