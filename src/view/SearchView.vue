@@ -122,8 +122,8 @@ const closeBookDetail = () => {
           <div v-if="isLoadingResult">
             <BaseLoader class="m-auto" />
           </div>
-          <div :class="[$style['empty-list'], 'm-auto d-flex']">
-            <EmptyResult v-if="isEmptyResult" />
+          <div :class="[$style['empty-list'], 'm-auto d-flex']" v-if="isEmptyResult">
+            <EmptyResult />
           </div>
         </div>
       </section>
