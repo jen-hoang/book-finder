@@ -1,17 +1,7 @@
 const formatBook = (bookItem) => {
   const { id, volumeInfo } = bookItem;
-  const {
-    title,
-    subtitle,
-    authors,
-    description,
-    imageLinks,
-    categories,
-    publishedDate,
-    previewLink,
-  } = volumeInfo;
+  const { title, subtitle, authors, description, imageLinks, categories, previewLink } = volumeInfo;
 
-  const year = publishedDate ? publishedDate.split('-')[0] : '';
   const img = imageLinks ? imageLinks.smallThumbnail : '';
   const largeImg = imageLinks ? imageLinks.thumbnail : '';
   return {
@@ -19,7 +9,6 @@ const formatBook = (bookItem) => {
     title,
     subtitle,
     authors,
-    year,
     description,
     img,
     largeImg,

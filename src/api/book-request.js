@@ -16,7 +16,7 @@ const searchBook = async ({ query, maxLimit, startIndex }) => {
     return data;
   }
   // Check error
-  const errorMessage = errorMessageList[response.status];
+  const errorMessage = errorMessageList[response.status] || response.statusText;
   if (errorMessage) {
     throw new Error(errorMessage);
   }
